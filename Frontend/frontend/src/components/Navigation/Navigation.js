@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import styled from 'styled-components'
 import avatar from '../../img/avatar.png'
 import { signout } from '../../utils/icons'
 import { menuItems } from '../../utils/menuItems'
+import { AuthContext } from '../../context/AuthContext';
 
 function Navigation({active, setActive}) {
-    
+    const { signOut } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        signOut();
+    };
     return (
         <NavStyled>
      
@@ -36,7 +41,7 @@ function Navigation({active, setActive}) {
             </ul>
 
             <div className="bottom-nav">
-                <li>
+                <li  onClick={handleSignOut}>
                     {signout} Sign Out
                 </li>
             </div>
