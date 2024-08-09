@@ -1,38 +1,37 @@
-const express = require('express')
+const express = require('express');
 const cors = require('cors');
-const { db } = require('./db/db');
+const mongoose = require('mongoose');
+require('dotenv').config();
+const authRoutes = require('./routes/auth');
+const authRoutes2 = require('./routes/transactions');
 
-// fs is file system ad readdirSync means read the sync directory synchronously so it is going to do line by line
-// so readdirSync reads the information line by line in a specified directory
 const {readdirSync} = require('fs')
 
-const app = express()
+const app = express();
 
+// Middleware
+app.use(express.json());
+app.use(cors());
 
-// require dotenv package
-require('dotenv').config()
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/', authRoutes2);
 
-//creating a PORT variable
-const PORT = process.env.PORT
+// readdirSync('./routes').map((route) => app.use('/api/v1', require('./routes/' + route)))
 
-//middlewares
-app.use(express.json())
-app.use(cors())
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('MongoDB connected successfully');
+})
+.catch((error) => {
+  console.error('MongoDB connection error:', error);
+});
 
-
-//routes
-// in the below line we are creating a base url for our api ,and lets just name it as v1
-readdirSync('./routes').map((route) => app.use('/api/v1', require('./routes/' + route)))
-
-
-// create a basic server
-const server = () => {
-    db()
-    app.listen(PORT, () => {
-        console.log('listening to port:', PORT)
-    })
-}
-
-
-// calling of server function
-server()
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
