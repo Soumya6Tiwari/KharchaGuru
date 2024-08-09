@@ -1,52 +1,52 @@
-import React, { useState,useContext } from 'react'
-import styled from 'styled-components'
-import avatar from '../../img/avatar.png'
-import { signout } from '../../utils/icons'
-import { menuItems } from '../../utils/menuItems'
+import React, { useState, useContext } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import avatar from '../../img/avatar.png';
+import { signout } from '../../utils/icons';
+import { menuItems } from '../../utils/menuItems';
 import { AuthContext } from '../../context/AuthContext';
 
-function Navigation({active, setActive}) {
+function Navigation({ active, setActive }) {
     const { signOut } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSignOut = () => {
         signOut();
+        navigate('/login');
     };
+
     return (
         <NavStyled>
-     
-           {/* creating a user container */}
+            {/* Creating a user container */}
             <div className="user-con">
-                <img src={avatar} alt="" />
+                <img src={avatar} alt="User Avatar" />
                 <div className="text">
-                    <h2>Nikki </h2>
+                    <h2>Nikki</h2>
                     <p>Your Money</p>
                 </div>
             </div>
 
-            {/* creating a menu item  unordered list */}
+            {/* Creating a menu item unordered list */}
             <ul className="menu-items">
-
-                {/* now we simply need to map through all of the menu items */}
-
-                {menuItems.map((item) => {
-                    return <li
+                {menuItems.map((item) => (
+                    <li
                         key={item.id}
                         onClick={() => setActive(item.id)}
-                        className={active === item.id ? 'active': ''}
+                        className={active === item.id ? 'active' : ''}
                     >
                         {item.icon}
                         <span>{item.title}</span>
                     </li>
-                })}
+                ))}
             </ul>
 
             <div className="bottom-nav">
-                <li  onClick={handleSignOut}>
+                <Button onClick={handleSignOut}>
                     {signout} Sign Out
-                </li>
+                </Button>
             </div>
         </NavStyled>
-    )
+    );
 }
 
 const NavStyled = styled.nav`
@@ -62,66 +62,65 @@ const NavStyled = styled.nav`
     justify-content: space-between;
     gap: 2rem;
 
-
-
-    .user-con{
+    .user-con {
         height: 100px;
         display: flex;
         align-items: center;
         gap: 1rem;
 
-        img{
+        img {
             width: 80px;
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
             background: #fcf6f9;
             border: 2px solid #FFFFFF;
-            padding: .2rem;
+            padding: 0.2rem;
             box-shadow: 0px 1px 17px rgba(0, 0, 0, 0.06);
         }
 
-        h2{
+        h2 {
             color: rgba(34, 34, 96, 1);
         }
-        p{
-            color: rgba(34, 34, 96, .6);
+
+        p {
+            color: rgba(34, 34, 96, 0.6);
         }
     }
 
-
-
-
-    .menu-items{
+    .menu-items {
         flex: 1;
         display: flex;
         flex-direction: column;
-        li{
+
+        li {
             display: grid;
             grid-template-columns: 40px auto;
             align-items: center;
-            margin: .6rem 0;
+            margin: 0.6rem 0;
             font-weight: 500;
             cursor: pointer;
-            transition: all .4s ease-in-out;
-            color: rgba(34, 34, 96, .6);
+            transition: all 0.4s ease-in-out;
+            color: rgba(34, 34, 96, 0.6);
             padding-left: 1rem;
             position: relative;
-            
-            i{
+
+            i {
                 color: rgba(34, 34, 96, 0.6);
                 font-size: 1.4rem;
-                transition: all .4s ease-in-out;
+                transition: all 0.4s ease-in-out;
             }
         }
     }
 
-    .active{
+    .active {
         color: rgba(34, 34, 96, 1) !important;
-        i{
+
+        i {
             color: rgba(34, 34, 96, 1) !important;
         }
-        &::before{
+
+        &::before {
             content: "";
             position: absolute;
             left: 0;
@@ -132,6 +131,37 @@ const NavStyled = styled.nav`
             border-radius: 0 10px 10px 0;
         }
     }
+
+    .bottom-nav {
+        display: flex;
+        justify-content: center;
+    }
 `;
 
-export default Navigation
+const Button = styled.button`
+    display: flex;
+    align-items: center;
+    background-color: #ff4b5c; /* Button color */
+    color: #fff;
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &:hover {
+        background-color: #ff2a45; /* Darker shade on hover */
+    }
+
+    &:active {
+        background-color: #e03d4e; /* Even darker shade on click */
+        transform: scale(0.98); /* Slightly scale down */
+    }
+
+    svg {
+        margin-right: 0.5rem; /* Space between icon and text */
+    }
+`;
+
+export default Navigation;

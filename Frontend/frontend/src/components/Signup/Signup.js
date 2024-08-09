@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
+import logo_kharcha_guru from '../../img/logo_kharcha_guru.png';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -22,57 +23,78 @@ const Signup = () => {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
-      backgroundColor: '#f0f2f5',
+      backgroundColor: '#FFF0F5',  // Example pink-purple mix
     },
     form: {
-      backgroundColor: '#fff',
+      backgroundColor: '#ffffff',
       padding: '40px',
-      borderRadius: '10px',
-      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+      borderRadius: '20px',
+      boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)',
       maxWidth: '400px',
       width: '100%',
     },
     input: {
       width: '100%',
-      padding: '10px',
-      margin: '10px 0',
-      borderRadius: '5px',
-      border: '1px solid #ccc',
+      padding: '12px',
+      margin: '12px 0',
+      borderRadius: '10px',
+      border: '1px solid #ced4da',
       fontSize: '16px',
+      boxSizing: 'border-box',
     },
     button: {
       width: '100%',
-      padding: '10px',
-      backgroundColor: '#28a745',
+      padding: '12px',
+      backgroundColor: 'green',  // Example pink-purple mix
       color: '#fff',
       border: 'none',
-      borderRadius: '5px',
+      borderRadius: '10px',
       fontSize: '16px',
       cursor: 'pointer',
-      marginTop: '10px',
+      marginTop: '15px',
+      transition: 'background-color 0.3s ease',
     },
     heading: {
       textAlign: 'center',
-      marginBottom: '20px',
-      color: '#333',
-    },
-    error: {
-      color: 'red',
-      marginTop: '10px',
-      textAlign: 'center',
+      marginBottom: '30px',
+      color: '#343a40',
+      fontSize: '24px',
     },
     link: {
       textAlign: 'center',
       marginTop: '20px',
       color: '#007bff',
       textDecoration: 'none',
-    }
+      fontSize: '14px',
+    },
+    subtitle: {
+      textAlign: 'center',
+      marginBottom: '30px',
+      color: '#6c757d',
+      fontSize: '16px',
+    },
+    logo: {
+      textAlign: 'center',
+      marginBottom: '30px',
+    },
+    logoImg: {
+      width: '80px',
+      height: '80px',
+      borderRadius: '50%',  // Circular shape
+    },
   };
 
   return (
     <div style={styles.container}>
+       <div style={styles.logo}>
+        <img
+          src={logo_kharcha_guru}
+          alt=""
+          style={styles.logoImg}
+        />
+      </div>
       <form style={styles.form} onSubmit={handleSubmit}>
-        <h2 style={styles.heading}>Signup</h2>
+        <h2 style={styles.heading}>New User</h2>
         <input
           type="text"
           placeholder="Username"

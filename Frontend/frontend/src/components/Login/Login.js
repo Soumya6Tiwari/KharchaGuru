@@ -1,15 +1,21 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
+import logo_kharcha_guru from '../../img/logo_kharcha_guru.png';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');  // State for error message
   const { login } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password);
+    try {
+      await login(username, password);
+    } catch (err) {
+      setError('Invalid username or password');  // Set error message
+    }
   };
 
   const styles = {
@@ -19,52 +25,85 @@ const Login = () => {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
-      backgroundColor: '#f0f2f5',
+      backgroundColor: '#FFF0F5',  // Example pink-purple mix
     },
     form: {
-      backgroundColor: '#fff',
+      backgroundColor: '#ffffff',
       padding: '40px',
-      borderRadius: '10px',
-      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+      borderRadius: '20px',
+      boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)',
       maxWidth: '400px',
       width: '100%',
     },
     input: {
       width: '100%',
-      padding: '10px',
-      margin: '10px 0',
-      borderRadius: '5px',
-      border: '1px solid #ccc',
+      padding: '12px',
+      margin: '12px 0',
+      borderRadius: '10px',
+      border: '1px solid #ced4da',
       fontSize: '16px',
+      boxSizing: 'border-box',
     },
     button: {
       width: '100%',
-      padding: '10px',
-      backgroundColor: '#007bff',
+      padding: '12px',
+      backgroundColor: '#FF00FF',  // Example pink-purple mix
       color: '#fff',
       border: 'none',
-      borderRadius: '5px',
+      borderRadius: '10px',
       fontSize: '16px',
       cursor: 'pointer',
-      marginTop: '10px',
+      marginTop: '15px',
+      transition: 'background-color 0.3s ease',
     },
     heading: {
       textAlign: 'center',
-      marginBottom: '20px',
-      color: '#333',
+      marginBottom: '30px',
+      color: '#343a40',
+      fontSize: '24px',
     },
     link: {
-        textAlign: 'center',
-        marginTop: '20px',
-        color: '#007bff',
-        textDecoration: 'none',
-      }
+      textAlign: 'center',
+      marginTop: '20px',
+      color: '#007bff',
+      textDecoration: 'none',
+      fontSize: '14px',
+    },
+    subtitle: {
+      textAlign: 'center',
+      marginBottom: '30px',
+      color: '#6c757d',
+      fontSize: '16px',
+    },
+    logo: {
+      textAlign: 'center',
+      marginBottom: '30px',
+    },
+    logoImg: {
+      width: '80px',
+      height: '80px',
+      borderRadius: '50%',  // Circular shape
+    },
+    error: {
+      color: 'red',
+      textAlign: 'center',
+      marginBottom: '10px',
+    },
   };
 
   return (
     <div style={styles.container}>
+      <div style={styles.logo}>
+        <img
+          src={logo_kharcha_guru}
+          alt="KharchaGuru Logo"
+          style={styles.logoImg}
+        />
+      </div>
       <form style={styles.form} onSubmit={handleSubmit}>
-        <h2 style={styles.heading}>Login</h2>
+        <h2 style={styles.heading}>KharchaGuru</h2>
+        <p style={styles.subtitle}>Streamline your expense management...</p>
+        {error && <p style={styles.error}>{error}</p>}  {/* Display error message */}
         <input
           type="text"
           placeholder="Username"
@@ -79,12 +118,17 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           style={styles.input}
         />
-        <button type="submit" style={styles.button}>
+        <button
+          type="submit"
+          style={styles.button}
+          onMouseEnter={(e) => (e.target.style.backgroundColor = '#218838')}
+          onMouseLeave={(e) => (e.target.style.backgroundColor = '#FF00FF')}
+        >
           Login
         </button>
         <p style={styles.link}>
-        New User? <Link to="/signup" style={{ color: '#007bff' }}>Signup</Link>
-      </p>
+          New here? <Link to="/signup" style={{ color: '#007bff' }}>Create an Account</Link>
+        </p>
       </form>
     </div>
   );

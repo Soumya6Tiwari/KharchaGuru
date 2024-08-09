@@ -110,7 +110,7 @@ const DashboardStyled = styled.div`
                     p{
                         color: var(--color-green);
                         opacity: 0.6;
-                        font-size: 3.5rem;
+                        font-size: 2.5rem;
                     }
                 }
             }
