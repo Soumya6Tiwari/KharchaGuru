@@ -42,7 +42,7 @@ function Navigation({ active, setActive }) {
 
             <div className="bottom-nav">
                 <Button onClick={handleSignOut}>
-                    {signout} Sign Out
+                    {signout} Log Out
                 </Button>
             </div>
         </NavStyled>

@@ -2,19 +2,24 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import logo_kharcha_guru from '../../img/logo_kharcha_guru.png';
+import BACKGROUND_LOGIN_SIGNUP from '../../img/BACKGROUND_LOGIN_SIGNUP.png';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');  // State for error message
+  const [error, setError] = useState('');
   const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!username || !password) {
+      setError('Please fill in both fields');
+      return;
+    }
     try {
       await login(username, password);
     } catch (err) {
-      setError('Invalid username or password');  // Set error message
+      setError('Invalid username or password');
     }
   };
 
@@ -25,10 +30,15 @@ const Login = () => {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
-      backgroundColor: '#FFF0F5',  // Example pink-purple mix
+      width: '100vw',
+      overflow: 'hidden',
+      backgroundImage: `url(${BACKGROUND_LOGIN_SIGNUP})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
     },
     form: {
-      backgroundColor: '#ffffff',
+      backgroundColor: '#FFF0F5',
       padding: '40px',
       borderRadius: '20px',
       boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)',
@@ -47,7 +57,7 @@ const Login = () => {
     button: {
       width: '100%',
       padding: '12px',
-      backgroundColor: '#FF00FF',  // Example pink-purple mix
+      backgroundColor: '#FF00FF',
       color: '#fff',
       border: 'none',
       borderRadius: '10px',
@@ -82,7 +92,7 @@ const Login = () => {
     logoImg: {
       width: '80px',
       height: '80px',
-      borderRadius: '50%',  // Circular shape
+      borderRadius: '50%',
     },
     error: {
       color: 'red',
@@ -103,7 +113,7 @@ const Login = () => {
       <form style={styles.form} onSubmit={handleSubmit}>
         <h2 style={styles.heading}>KharchaGuru</h2>
         <p style={styles.subtitle}>Streamline your expense management...</p>
-        {error && <p style={styles.error}>{error}</p>}  {/* Display error message */}
+        {error && <p style={styles.error}>{error}</p>}
         <input
           type="text"
           placeholder="Username"

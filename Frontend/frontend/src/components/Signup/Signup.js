@@ -1,7 +1,9 @@
+
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import logo_kharcha_guru from '../../img/logo_kharcha_guru.png';
+import BACKGROUND_LOGIN_SIGNUP from '../../img/BACKGROUND_LOGIN_SIGNUP.png';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -9,8 +11,24 @@ const Signup = () => {
   const [error, setError] = useState('');
   const { signup } = useContext(AuthContext);
 
+  const validateInputs = () => {
+    if (username.length < 6) {
+      return 'Username must be at least 6 characters long.';
+    }
+    if (password.length < 6) {
+      return 'Password must be at least 6 characters long.';
+    }
+    return '';
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validationError = validateInputs();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     signup(username, password).catch(err => {
       setError('Signup failed. Please try again.');
     });
@@ -23,10 +41,15 @@ const Signup = () => {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
-      backgroundColor: '#FFF0F5',  // Example pink-purple mix
+      width: '100vw',
+      overflow: 'hidden',
+      backgroundImage: `url(${BACKGROUND_LOGIN_SIGNUP})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
     },
     form: {
-      backgroundColor: '#ffffff',
+      backgroundColor: '#FFF0F5',
       padding: '40px',
       borderRadius: '20px',
       boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)',
@@ -45,7 +68,7 @@ const Signup = () => {
     button: {
       width: '100%',
       padding: '12px',
-      backgroundColor: 'green',  // Example pink-purple mix
+      backgroundColor: 'green',
       color: '#fff',
       border: 'none',
       borderRadius: '10px',
@@ -80,16 +103,21 @@ const Signup = () => {
     logoImg: {
       width: '80px',
       height: '80px',
-      borderRadius: '50%',  // Circular shape
+      borderRadius: '50%',
+    },
+    error: {
+      color: 'red',
+      textAlign: 'center',
+      marginBottom: '10px',
     },
   };
 
   return (
     <div style={styles.container}>
-       <div style={styles.logo}>
+      <div style={styles.logo}>
         <img
           src={logo_kharcha_guru}
-          alt=""
+          alt="KharchaGuru Logo"
           style={styles.logoImg}
         />
       </div>
@@ -122,3 +150,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
