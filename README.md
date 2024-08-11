@@ -138,16 +138,15 @@ Here are the installation steps for the KharchaGuru project:
    npm install
 
 4. **Setup Environment Variables**:
-   Create a `.env` file in the `backend` directory and add the following environment variables:
-   MONGODB_URI=mongodb+srv://soumyaecc6:bachat123@expense.cgzpsya.mongodb.net/?retryWrites=true&w=majority&appName=Expense
-   <br>
+   Create a `.env` file in the `backend` directory and add the following environment variables:<br>
+   MONGODB_URI=   mongodb+srv://soumyaecc6:bachat123@expense.cgzpsya.mongodb.net/?retryWrites=true&w=majority&appName=Expense <br>
    JWT_SECRET=MCA2025
    
 5. **Start the Backend Server**:
    npm start
    
 6. **Start the Frontend Development Server**:
-   Now, navigate back to the frontend directory and start the frontend server:
+   Now, navigate back to the frontend directory and start the frontend server:<br>
    npm start
    
 7. **Access KharchaGuru**:
