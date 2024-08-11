@@ -8,21 +8,18 @@ import BACKGROUND_LOGIN_SIGNUP from '../../img/BACKGROUND_LOGIN_SIGNUP.png';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState('');  // State for error message
   const { login } = useContext(AuthContext);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    if (!username || !password) {
-            setError('Please fill in both fields');
-            return;
-          }
-          try {
-            await login(username, password);
-          } catch (err) {
-            setError('Invalid username or password');
-          }
-        };
+    try {
+      await login(username, password);
+    } catch (err) {
+      setError('Invalid username or password');  // Set error message
+    }
+  };
+
 
         const styles = {
           container: {
