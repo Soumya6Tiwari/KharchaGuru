@@ -59,9 +59,9 @@ KharchaGuru is a cutting-edge MERN stack-powered expense tracker crafted to elev
 - [Getting Started](#getting-started)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#understanding-the-code)
-- [License](#resources)
-- [Contact](#support)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ## Features
 
@@ -160,7 +160,7 @@ Here are the installation steps for the KharchaGuru project:
 
 # Usage
 Here’s the usage section for the KharchaGuru project:
-
+ ### usage
 1. **Sign Up or Log In**:
    - Visit `http://localhost:3000` in your web browser.
    - If you don't have an account, click on the "Sign Up" button and create an account by providing your email and password.
@@ -186,12 +186,15 @@ Here’s the usage section for the KharchaGuru project:
    - When you're done, ensure to log out of your account securely by clicking on the "Log Out" button.
 
 # Contributing
+### contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
 # License
+### license
 This project is licensed under the MIT License.
 
 # Contact
+### contact
 For any inquiries or feedback, please reach out to soumyaecc6@example.com
 
 
