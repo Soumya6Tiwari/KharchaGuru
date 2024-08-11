@@ -5,6 +5,9 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const authRoutes2 = require('./routes/transactions');
 
+
+// fs is file system ad readdirSync means read the sync directory synchronously so it is going to do line by line
+// so readdirSync reads the information line by line in a specified directory
 const {readdirSync} = require('fs')
 
 const app = express();

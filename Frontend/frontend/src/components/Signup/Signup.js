@@ -122,7 +122,7 @@ const Signup = () => {
         />
       </div>
       <form style={styles.form} onSubmit={handleSubmit}>
-        <h2 style={styles.heading}>New User</h2>
+        <h2 style={styles.heading}>Signup</h2>
         <input
           type="text"
           placeholder="Username"
@@ -143,7 +143,7 @@ const Signup = () => {
         {error && <p style={styles.error}>{error}</p>}
       </form>
       <p style={styles.link}>
-        Already have an account? <Link to="/login" style={{ color: '#007bff' }}>Login here</Link>
+      Already have an account? <Link to="/login" style={{ color: '#007bff' }}>Login here</Link>
       </p>
     </div>
   );
